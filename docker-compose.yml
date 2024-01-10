@@ -6,8 +6,8 @@ services:
     image: "docker.io/bitnami/postgresql-repmgr:15"
     container_name: "postgresql-repmgr"
     restart: unless-stopped
-    #ports:
-    #  - "5432:5432"
+    ports:
+      - "5432:5432"
     volumes:
       - "kub-postgres:/bitnami/postgresql"
     environment:
