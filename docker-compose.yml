@@ -7,17 +7,17 @@ services:
     container_name: "postgresql-repmgr"
     restart: unless-stopped
     #ports:
-    #  - "5433:5433"
+    #  - "5432:5432"
     volumes:
       - "kub-postgres:/bitnami/postgresql"
     environment:
       - POSTGRESQL_USERNAME=root
       - REPMGR_PRIMARY_HOST=n1.oze.li
-      - REPMGR_PRIMARY_PORT=5433
-      - REPMGR_PARTNER_NODES=n1.oze.li:5433,granite.ozeliurs.com:5433
+      - REPMGR_PRIMARY_PORT=5432
+      - REPMGR_PARTNER_NODES=n1.oze.li:5432,granite.ozeliurs.com:5432
       - REPMGR_NODE_NAME=pg-0
       - REPMGR_NODE_NETWORK_NAME=n1.oze.li
-      - REPMGR_PORT_NUMBER=5433
+      - REPMGR_PORT_NUMBER=5432
     env_file:
       - .postgres.env
 
