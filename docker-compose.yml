@@ -6,12 +6,12 @@ services:
     image: "docker.io/bitnami/postgresql-repmgr:15"
     container_name: "postgresql-repmgr"
     restart: unless-stopped
-    ports:
-      - "5433:5433"
+    #ports:
+    #  - "5433:5433"
     volumes:
         - "./postgres:/bitnami/postgresql"
     environment:
-      - POSTGRESQL_USERNAME=customuser
+      - POSTGRESQL_USERNAME=root
       - REPMGR_PRIMARY_HOST=n1.oze.li
       - REPMGR_PRIMARY_PORT=5433
       - REPMGR_PARTNER_NODES=n1.oze.li:5433,granite.ozeliurs.com:5433
