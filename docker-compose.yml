@@ -1,8 +1,7 @@
 version: "3.9"
 
 services:
-
-  kub-postgres: # db-kub.oze.li:5432
+  kub-postgres:
     image: "docker.io/bitnami/postgresql-repmgr:15"
     container_name: "postgresql-repmgr"
     restart: unless-stopped
@@ -15,8 +14,8 @@ services:
       - REPMGR_PRIMARY_HOST=n1.oze.li
       - REPMGR_PRIMARY_PORT=5432
       - REPMGR_PARTNER_NODES=n1.oze.li:5432,granite.ozeliurs.com:5432
-      - REPMGR_NODE_NAME=pg-0
-      - REPMGR_NODE_NETWORK_NAME=n1.oze.li
+      - REPMGR_NODE_NAME=pg-1
+      - REPMGR_NODE_NETWORK_NAME=granite.ozeliurs.com
       - REPMGR_PORT_NUMBER=5432
     env_file:
       - .postgres.env
