@@ -2,14 +2,14 @@ version: "3.9"
 
 services:
 
-  kub-postgres:
+  kub-postgres:   # db-kub.oze.li:5432
     image: "docker.io/bitnami/postgresql-repmgr:15"
     container_name: "postgresql-repmgr"
     restart: unless-stopped
     ports:
       - "5432:5432"
     volumes:
-      - "kub-postgres:/bitnami/postgresql"
+      - "./postgres:/bitnami/postgresql"
     environment:
       - POSTGRESQL_USERNAME=root
       - REPMGR_PRIMARY_HOST=n1.oze.li
@@ -25,7 +25,3 @@ services:
 networks:
   traefik:
     external: true
-
-volumes:
-  kub-postgres:
-    driver: local
