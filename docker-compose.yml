@@ -9,7 +9,7 @@ services:
     #ports:
     #  - "5433:5433"
     volumes:
-        - "./postgres:/bitnami/postgresql"
+      - "kub-postgres:/bitnami/postgresql"
     environment:
       - POSTGRESQL_USERNAME=root
       - REPMGR_PRIMARY_HOST=n1.oze.li
@@ -25,3 +25,7 @@ services:
 networks:
   traefik:
     external: true
+
+volumes:
+  kub-postgres:
+    driver: local
