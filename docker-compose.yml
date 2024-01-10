@@ -2,24 +2,24 @@ version: "3.9"
 
 services:
 
-  hello-world:
-    image: "traefik/whoami"
-    container_name: "simple-service"
+  kub-postgres:
+    image: "docker.io/bitnami/postgresql-repmgr:15"
+    container_name: "postgresql-repmgr"
     restart: unless-stopped
-    networks:
-      - traefik
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.simple-service.rule=Host(`hello-world.${BASE_DOMAIN:-ozeliurs.com}`)"
-      - "traefik.http.routers.simple-service.entrypoints=websecure"
-      - "traefik.http.routers.simple-service.tls=true"
-      - "traefik.http.routers.simple-service.tls.certresolver=cloudflare"
-      - "traefik.http.services.simple-service.loadbalancer.server.port=80"
-    healthcheck:
-      test: [ "CMD", "wget", "-q", "--spider", "http://localhost:80" ]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+    ports:
+      - "5433:5433"
+    volumes:
+        - "./postgres:/bitnami/postgresql"
+    environment:
+      - POSTGRESQL_USERNAME=customuser
+      - REPMGR_PRIMARY_HOST=n1.oze.li
+      - REPMGR_PRIMARY_PORT=5433
+      - REPMGR_PARTNER_NODES=n1.oze.li:5433,granite.ozeliurs.com:5433
+      - REPMGR_NODE_NAME=pg-0
+      - REPMGR_NODE_NETWORK_NAME=n1.oze.li
+      - REPMGR_PORT_NUMBER=5433
+    env_file:
+      - .postgres.env
 
 
 networks:
