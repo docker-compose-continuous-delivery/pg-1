@@ -9,6 +9,7 @@ services:
       - "5432:5432"
     volumes:
       - "kube-postgres:/bitnami/postgresql"
+      - "./pg-confs:/bitnami/postgresql/conf/conf.d/"
     environment:
       - POSTGRESQL_USERNAME=root
       - REPMGR_PRIMARY_HOST=n1.oze.li
